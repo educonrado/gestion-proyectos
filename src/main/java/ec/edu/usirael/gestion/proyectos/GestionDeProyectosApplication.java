@@ -1,0 +1,13 @@
+package ec.edu.usirael.gestion.proyectos;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class GestionDeProyectosApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(GestionDeProyectosApplication.class, args);
+	}
+
+}
