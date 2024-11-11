@@ -10,10 +10,7 @@ public class InicioControlador {
     public String obtenerDashboard() {
         return "index";
     }
-    @GetMapping("/gestion/proyectos")
-    public String abrirProyectos() {
-        return "gestion/proyectos";
-    }
+
     @GetMapping("/gestion/tareas")
     public String abrirTareas() {
         return "gestion/tareas";
