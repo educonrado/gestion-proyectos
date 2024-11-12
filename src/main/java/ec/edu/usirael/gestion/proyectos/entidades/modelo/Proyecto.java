@@ -1,12 +1,18 @@
 package ec.edu.usirael.gestion.proyectos.entidades.modelo;
 
-import ec.edu.usirael.gestion.proyectos.entidades.enumerador.EstadoEnum;
-import jakarta.persistence.*;
-import lombok.Data;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import lombok.Data;
 
 @Data
 @Entity
@@ -22,9 +28,11 @@ public class Proyecto implements Serializable {
 
     private String descripcion;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "fecha_inicio")
     private LocalDate fechaInicio;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "fecha_fin")
     private LocalDate fechaFin;
 
@@ -32,5 +40,10 @@ public class Proyecto implements Serializable {
 
     @OneToMany(mappedBy = "proyecto")
     private List<Tarea> tareas;
+    
+    @Override
+    public String toString() {
+        return "Proyecto{id=" + codigo + ", nombre='" + nombre + "'}";
+    }
 
 }

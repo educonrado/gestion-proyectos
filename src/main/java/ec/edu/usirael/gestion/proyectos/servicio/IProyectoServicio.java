@@ -4,6 +4,7 @@ import ec.edu.usirael.gestion.proyectos.entidades.modelo.Proyecto;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public interface IProyectoServicio {
 
@@ -24,4 +25,6 @@ public interface IProyectoServicio {
     public List<Proyecto> listadoProyectosFechaInicioMayorAFecha(LocalDate fechaInicio);
 
     public List<Proyecto> listadoProyectosFechaFinMenorAFecha(LocalDate fechaFin);
+    
+    public Optional<Proyecto> obtenerProyectoPorCodigo(int codigo);
 }

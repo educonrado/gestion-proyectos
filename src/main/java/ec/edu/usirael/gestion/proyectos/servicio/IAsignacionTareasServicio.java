@@ -4,6 +4,7 @@ import ec.edu.usirael.gestion.proyectos.entidades.modelo.AsignacionTareas;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public interface IAsignacionTareasServicio {
 
@@ -24,4 +25,6 @@ public interface IAsignacionTareasServicio {
     public List<AsignacionTareas> listadoTareasPorUsuario(int codigoUsuario);
 
     public List<String> mostrarEquipoDeProyecto(int codigoProyecto);
+    
+    public Optional<AsignacionTareas> obtenerAsignacionPorCodigo(int id);
 }

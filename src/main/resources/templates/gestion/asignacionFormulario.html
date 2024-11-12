@@ -3,12 +3,12 @@
 
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<title>Tareas</title>
+	<title>Asignaciónd de tareas</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
 	<link rel="icon" th:href="@{/assets/img/kaiadmin/favicon.ico}" type="image/x-icon" />
 
 	<!-- Fonts and icons -->
-	<script th:src="@{/assets/js/plugin/webfont/webfont.min.js}"></script>
+
 	<script>
 		WebFont.load({
 			google: {"families": ["Public Sans:300,400,500,600,700"]},
@@ -74,7 +74,7 @@
 								<p>Gesti&oacute;n</p>
 								<span class="caret"></span>
 							</a>
-							<div class="collapse" id="base">
+							<div class="collapse" id="baseUsuario">
 								<ul class="nav nav-collapse">
 									<li>
 										<a th:href="@{/gestion/proyectos}">
@@ -209,7 +209,7 @@
 			<div class="container">
 				<div class="page-inner">
 					<div class="page-header">
-						<h3 class="fw-bold mb-3">Proyectos</h3>
+						<h3 class="fw-bold mb-3">Asignación de tareas</h3>
 						<ul class="breadcrumbs mb-3">
 							<li class="nav-home">
 								<a href="#">
@@ -218,15 +218,6 @@
 							</li>
 							<li class="separator">
 								<i class="icon-arrow-right"></i>
-							</li>
-							<li class="nav-item">
-								<a href="#">Gesti&oacute;n</a>
-							</li>
-							<li class="separator">
-								<i class="icon-arrow-right"></i>
-							</li>
-							<li class="nav-item">
-								<a href="#">Tareas</a>
 							</li>
 						</ul>
 					</div>
@@ -237,63 +228,62 @@
 								<div class="card">
 									<div class="card-header">
 										<div class="d-flex align-items-center">
-											<h4 class="card-title">Listado de tareas</h4>
-											<a class="btn btn-primary btn-round ms-auto"
-												th:href="@{/gestion/tareas/formulario}">
-												<i class="fa fa-plus"></i>
-												Agregar
-											</a>
+											<h4 class="card-title">Asignar tareas</h4>
 										</div>
 									</div>
 									<div class="card-body">
+										<form th:action="@{/gestion/asignacion/guardar}" th:object="${nuevaAsignacion}"
+											method="post">
+											<input type="hidden" th:if="${codigo != null}" th:field="*{codigo}" />
 
-										<div class="table-responsive">
-											<table id="add-row" class="display table table-striped table-hover">
-												<thead>
-													<tr>
-														<th>C&oacute;digo</th>
-														<th>Nombre</th>
-														<th>Descripci&oacute;n</th>
-														<th>Progreso</th>
-														<th>Prioridad</th>
-														<th>Estado</th>
-														<th>Inicio</th>
-														<th>Fin</th>
-														<th style="width: 10%">Acciones</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr th:each="tarea: ${tareas}">
-														<td th:text="${tarea.codigo}"></td>
-														<td th:text="${tarea.nombre}"></td>
-														<td th:text="${tarea.descripcion}"></td>
-														<td th:text="${tarea.progreso}"></td>
-														<td th:text="${tarea.prioridad}"></td>
-														<td th:text="${tarea.estado}"></td>
-														<td th:text="${tarea.fechaInicio}"></td>
-														<td th:text="${tarea.fechaFin}"></td>
+											<div class="row">
+												<div class="col-sm-12">
+													<div class="form-group form-group-default">
+														<label>Fecha</label>
+														<input id="addFecha" type="date" required="true"
+															th:field="*{fechaAsignacion}" class="form-control" />
+													</div>
+												</div>
+												<div class="col-sm-12">
+													<div class="form-group form-group-default">
+														<label>Tarea</label>
+														<select class="form-select" id="formGroupDefaultSelect"
+															th:field="*{tarea}" required="true">
+															<option value="" disabled selected>Selecciona una tarea
+															</option>
+															<option th:each="tarea: ${tareas}"
+																th:value="${tarea.codigo}" th:text="${tarea.nombre}">
+															</option>
+														</select>
+													</div>
+												</div>
+												<div class="col-sm-12">
+													<div class="form-group form-group-default">
+														<label>Usuario</label>
+														<select class="form-select" id="formGroupDefaultSelect"
+															th:field="*{usuario}" required="true">
+															<option value="" disabled selected>Selecciona usuario
+															</option>
+															<option th:each="usuario: ${usuarios}"
+																th:value="${usuario.codigo}"
+																th:text="${usuario.nombre}">
+															</option>
+														</select>
+													</div>
+												</div>
 
-														<td>
-															<div class="form-button-action">
-																<a class="btn btn-link btn-primary btn-lg"
-																	data-original-title="Editar tarea"
-																	th:href="@{/gestion/tareas/editar/}+${tarea.codigo}">
-																	<i class="fa fa-edit"></i>
-																</a>
-																<a type="button"
-																	onclick="return confirm('¿Estás seguro de que deseas eliminar la tarea?');"
-																	th:href="@{/gestion/tareas/eliminar/}+${tarea.codigo}"
-																	class="btn btn-link btn-danger"
-																	data-original-title="Eliminar">
-																	<i class="fa fa-times"></i>
-																</a>
-															</div>
-														</td>
-													</tr>
-
-												</tbody>
-											</table>
-										</div>
+												<div class="demo">
+													<button type="submit" id="addRowButtonAsignacion"
+														class="btn btn-primary">
+														Agregar
+													</button>
+													<a type="button" class="btn btn-danger"
+														th:href="@{/gestion/asignacion}">
+														Cerrar
+													</a>
+												</div>
+											</div>
+										</form>
 									</div>
 								</div>
 							</div>

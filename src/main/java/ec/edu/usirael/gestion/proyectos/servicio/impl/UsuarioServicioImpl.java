@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsuarioServicioImpl implements IUsuarioServicio {
@@ -100,4 +101,13 @@ public class UsuarioServicioImpl implements IUsuarioServicio {
             return null;
         }
     }
+
+	public Optional<Usuario> obtenerUsuarioPorCodigo(int id) {
+		try {
+			return usuarioRepositorio.findById(id);
+        } catch (Exception e) {
+            System.err.println("Error: No se puede obtener lista de objeto. " + e);
+            return null;
+        }
+	}
 }

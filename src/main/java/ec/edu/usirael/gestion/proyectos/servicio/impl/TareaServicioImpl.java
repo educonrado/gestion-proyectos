@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TareaServicioImpl implements ITareaServicio {
@@ -108,4 +109,13 @@ public class TareaServicioImpl implements ITareaServicio {
             return null;
         }
     }
+
+	public Optional<Tarea> obtenerTareaPorCodigo(int id) {
+		try {
+            return tareaRepositorio.findById(id);
+        } catch (Exception e) {
+            System.err.println("Error: No se puede obtener objeto. " + e);
+            return null;
+        }
+	}
 }

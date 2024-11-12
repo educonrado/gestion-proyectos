@@ -10,13 +10,4 @@ public class InicioControlador {
     public String obtenerDashboard() {
         return "index";
     }
-
-    @GetMapping("/gestion/tareas")
-    public String abrirTareas() {
-        return "gestion/tareas";
-    }
-    @GetMapping("/gestion/usuarios")
-    public String abrirUsuarios() {
-        return "gestion/usuarios";
-    }
 }

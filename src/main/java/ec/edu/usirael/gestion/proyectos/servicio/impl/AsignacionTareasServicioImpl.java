@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AsignacionTareasServicioImpl implements IAsignacionTareasServicio {
@@ -102,4 +103,13 @@ public class AsignacionTareasServicioImpl implements IAsignacionTareasServicio {
             return null;
         }
     }
+
+	public Optional<AsignacionTareas> obtenerAsignacionPorCodigo(int id) {
+		try {
+            return asignacionRepositorio.findById(id);
+        } catch (Exception e) {
+            System.err.println("Error: No se puede obtener lista de objeto. " + e);
+            return null;
+        }
+	}
 }

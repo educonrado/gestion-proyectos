@@ -3,7 +3,7 @@
 
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<title>Tareas</title>
+	<title>Asignación de tareas</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
 	<link rel="icon" th:href="@{/assets/img/kaiadmin/favicon.ico}" type="image/x-icon" />
 
@@ -226,7 +226,7 @@
 								<i class="icon-arrow-right"></i>
 							</li>
 							<li class="nav-item">
-								<a href="#">Tareas</a>
+								<a href="#">Asignación de tareas</a>
 							</li>
 						</ul>
 					</div>
@@ -237,9 +237,9 @@
 								<div class="card">
 									<div class="card-header">
 										<div class="d-flex align-items-center">
-											<h4 class="card-title">Listado de tareas</h4>
+											<h4 class="card-title">Listado de asignación de tareas</h4>
 											<a class="btn btn-primary btn-round ms-auto"
-												th:href="@{/gestion/tareas/formulario}">
+												th:href="@{/gestion/asignacion/formulario}">
 												<i class="fa fa-plus"></i>
 												Agregar
 											</a>
@@ -252,43 +252,73 @@
 												<thead>
 													<tr>
 														<th>C&oacute;digo</th>
-														<th>Nombre</th>
-														<th>Descripci&oacute;n</th>
-														<th>Progreso</th>
-														<th>Prioridad</th>
-														<th>Estado</th>
-														<th>Inicio</th>
-														<th>Fin</th>
-														<th style="width: 10%">Acciones</th>
+														<th>Fecha</th>
+														<th>Tarea</th>
+														<th>Usuario</th>
+														<th>Acciones</th>
 													</tr>
 												</thead>
 												<tbody>
-													<tr th:each="tarea: ${tareas}">
-														<td th:text="${tarea.codigo}"></td>
-														<td th:text="${tarea.nombre}"></td>
-														<td th:text="${tarea.descripcion}"></td>
-														<td th:text="${tarea.progreso}"></td>
-														<td th:text="${tarea.prioridad}"></td>
-														<td th:text="${tarea.estado}"></td>
-														<td th:text="${tarea.fechaInicio}"></td>
-														<td th:text="${tarea.fechaFin}"></td>
+													<tr th:each="as: ${asignacion}">
+														<td th:text="${as.codigo}"></td>
+														<td th:text="${as.fechaAsignacion}"></td>
+														<td th:text="${as.tarea.nombre}"></td>
+														<td th:text="${as.usuario.nombre}"></td>
 
 														<td>
 															<div class="form-button-action">
 																<a class="btn btn-link btn-primary btn-lg"
-																	data-original-title="Editar tarea"
-																	th:href="@{/gestion/tareas/editar/}+${tarea.codigo}">
+																	data-original-title="Editar proyecto"
+																	th:href="@{/gestion/asignacion/editar/}+${as.codigo}">
 																	<i class="fa fa-edit"></i>
 																</a>
 																<a type="button"
-																	onclick="return confirm('¿Estás seguro de que deseas eliminar la tarea?');"
-																	th:href="@{/gestion/tareas/eliminar/}+${tarea.codigo}"
+																	onclick="return confirm('¿Estás seguro de que deseas eliminar estas asignación?');"
+																	th:href="@{/gestion/asignacion/eliminar/}+${as.codigo}"
 																	class="btn btn-link btn-danger"
 																	data-original-title="Eliminar">
 																	<i class="fa fa-times"></i>
 																</a>
 															</div>
 														</td>
+													</tr>
+
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-md-12">
+								<div class="card">
+									<div class="card-header">
+										<div class="d-flex align-items-center">
+											<h4 class="card-title">Historial</h4>
+											
+										</div>
+									</div>
+									<div class="card-body">
+
+										<div class="table-responsive">
+											<table id="add-row" class="display table table-striped table-hover">
+												<thead>
+													<tr>
+														<th>C&oacute;digo</th>
+														<th>Detalles</th>
+														<th>Actualización</th>
+														<th>Código asignación</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr th:each="h: ${historial}">
+														<td th:text="${h.codigo}"></td>
+														<td th:text="${h.detalles}"></td>
+														<td th:text="${h.fechaActualizacion}"></td>
+														<td th:text="${h.asignacion.codigo}"></td>
 													</tr>
 
 												</tbody>

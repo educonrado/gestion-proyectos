@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProyectoServicioImpl implements IProyectoServicio {
@@ -101,4 +102,14 @@ public class ProyectoServicioImpl implements IProyectoServicio {
             return null;
         }
     }
+
+	@Override
+	public Optional<Proyecto> obtenerProyectoPorCodigo(int codigo) {
+		try {
+			return proyectoRepositorio.findById(codigo);
+        } catch (Exception e) {
+            System.err.println("Error: No se puede obtener lista de objeto. " + e);
+            return null;
+        }
+	}
 }

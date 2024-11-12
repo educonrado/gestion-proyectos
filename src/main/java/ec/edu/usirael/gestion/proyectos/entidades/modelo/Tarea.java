@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Data
 @Entity
 public class Tarea implements Serializable {
@@ -25,14 +27,16 @@ public class Tarea implements Serializable {
 
     private int progreso;
     @Enumerated(EnumType.STRING)
-    private EstadoEnum estado;
+    private EstadoEnum estado = EstadoEnum.PENDIENTE;
 
     @Enumerated(EnumType.STRING)
     private PrioridadEnum prioridad;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "fecha_inicio")
     private LocalDate fechaInicio;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "fecha_fin")
     private LocalDate fechaFin;
 
@@ -42,4 +46,9 @@ public class Tarea implements Serializable {
 
     @OneToMany(mappedBy = "tarea")
     private List<AsignacionTareas> tareasAsignadas;
+    
+    @Override
+    public String toString() {
+        return "Tarea{id=" + codigo + ", nombre='" + nombre + "'}";
+    }
 }
